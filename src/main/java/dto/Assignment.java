@@ -2,6 +2,9 @@ package dto;
 
 public class Assignment {
     private Integer id;
+
+
+
     private String name;
     private String year;
     private String ss;
@@ -22,6 +25,13 @@ public class Assignment {
 
     public Assignment(Integer id, String name, String year, String ss, String phone_number, String etc) {
         this.id = id;
+        this.name = name;
+        this.year = year;
+        this.ss = ss;
+        this.phone_number = phone_number;
+        this.etc = etc;
+    }
+    public Assignment(String name, String year, String ss, String phone_number, String etc) {
         this.name = name;
         this.year = year;
         this.ss = ss;
@@ -65,6 +75,10 @@ public class Assignment {
         this.etc = etc;
     }
 
+    public Assignment(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Assignment{" +
@@ -76,4 +90,5 @@ public class Assignment {
                 ", etc='" + etc + '\'' +
                 '}';
     }
+
 }

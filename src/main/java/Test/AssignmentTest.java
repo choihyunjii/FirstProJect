@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AssignmentTest {
     public static void main(String[] args) {
-       /* Scanner insert = new Scanner(System.in);
+       Scanner insert = new Scanner(System.in);
         System.out.println("id:");
         int id = Integer.parseInt(insert.nextLine());
         System.out.println("name:");
@@ -27,11 +27,11 @@ public class AssignmentTest {
 
 
 
-       AssignmentDao dao = new AssignmentDao();
+      /* AssignmentDao dao = new AssignmentDao();
         Assignment assignment = dao.getUser(3);
         System.out.println(assignment);*/
 
-       int id=10;
+      /* int id=10;
         String name="변백현";
         String year="1991-05-06";
         String ss="남자";
@@ -40,6 +40,6 @@ public class AssignmentTest {
         Assignment assignment = new Assignment(id,name,year,ss,phone_number,etc);
         AssignmentDao assignmentDao = new AssignmentDao();
         int insertCount=assignmentDao.adduser(assignment);
-        System.out.println(insertCount);
+        System.out.println(insertCount);*/
     }
 }

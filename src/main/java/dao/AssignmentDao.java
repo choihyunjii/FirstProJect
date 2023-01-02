@@ -9,10 +9,12 @@ package dao;
 ////DriverManager ->Connection -> Statement ->ResultSet 순서로 진행 닫을떄는 반대로 진행!
 
 import dto.Assignment;
+import java.sql.DriverManager;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+
+
 import java.sql.ResultSet;
 
 public class AssignmentDao {
@@ -28,10 +30,10 @@ public class AssignmentDao {
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn= DriverManager.getConnection(dburl,dbuser,dbpassword); // database 실질적 접근 부분
-            String sql="SELECT * FROM assignment WHERE id=?";
-            ps=conn.prepareStatement(sql);   // 쿼리문 실행
-            ps.setInt(1,id);
+            conn= DriverManager.getConnection(dburl,dbuser,dbpassword); // database 실질적 접근 부분  연결
+            String sql="SELECT * FROM assignment WHERE id=?";   //statement 쿼리문
+            ps=conn.prepareStatement(sql);   // 쿼리문 실행 //4           쿼리문 연결해서 실행
+            ps.setInt(1,id);                       //쿼리문 연결됐으면 1 실행?
             rs=ps.executeQuery(); // rs 쿼리실행
             if(rs.next()){ // rs 값이 있다면
                 int Userid =rs.getInt(1);
@@ -65,12 +67,53 @@ public class AssignmentDao {
             ps.setString(6,assignment.getEtc());
             insertCount=ps.executeUpdate();
 
-
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
         return insertCount;
+
     }
+    public int deleteuser(Assignment assignment){
+       int deleteCount = 0;
+       Connection conn = null;
+       PreparedStatement ps=null;
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           conn=DriverManager.getConnection(dburl,dbuser,dbpassword);
+           String sql="delete from assignment where id =? ";
+           ps=conn.prepareStatement(sql);   // 쿼리문 실행 //4           쿼리문 연결해서 실행
+           ps.setInt(1,assignment.getId());
+           deleteCount=ps.executeUpdate();
+
+
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+       return deleteCount;
+    }
+    public int updateuser(Assignment assignment,int id){
+        int updateCount = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn=DriverManager.getConnection(dburl,dbuser,dbpassword);
+            String sql ="update assignment set name=?, year=?, ss=?, phone_number=?,etc=? where id=?";
+            ps=conn.prepareStatement(sql);
+            ps.setString(1,assignment.getName());
+            ps.setString(2,assignment.getYear());
+            ps.setString(3,assignment.getSs());
+            ps.setString(4,assignment.getPhone_number());
+            ps.setString(5,assignment.getEtc());
+            ps.setInt(6,id);
+
+            updateCount=ps.executeUpdate();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return updateCount;
+    }
+
 }
